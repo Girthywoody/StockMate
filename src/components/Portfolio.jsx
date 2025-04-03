@@ -19,7 +19,13 @@ const Portfolio = ({ stocks }) => {
   const sortedStocks = [...stocksWithAllocation].sort((a, b) => b.marketValue - a.marketValue);
 
   if (stocks.length === 0) {
-    return <p>No stocks in your portfolio. Add some stocks to get started!</p>;
+    return (
+      <div className="dashboard-empty">
+        <h2 className="section-title">Portfolio Overview</h2>
+        <p>No stocks in your portfolio. Add some stocks to get started!</p>
+        <p>Go to the "Manage Stocks" tab to add your first stock.</p>
+      </div>
+    );
   }
 
   return (
@@ -87,40 +93,94 @@ const Portfolio = ({ stocks }) => {
         </tbody>
       </table>
       
-      {/* Visual representation of allocation */}
+      {/* Improved visual representation of allocation */}
       <div className="portfolio-chart">
         <h3 className="section-title">Allocation Chart</h3>
-        <div className="allocation-bar">
-          {sortedStocks.map((stock) => (
-            <div 
-              key={stock.id}
-              className="allocation-segment"
-              style={{ 
-                width: `${stock.allocation}%`,
-                backgroundColor: getRandomColor(stock.symbol),
-                height: '40px',
-                display: 'inline-block'
-              }}
-              title={`${stock.symbol}: ${stock.allocation}%`}
-            />
-          ))}
+        
+        {/* Horizontal bar chart for allocations */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          marginTop: '20px',
+          marginBottom: '30px'
+        }}>
+          {sortedStocks.map((stock) => {
+            const barColor = getRandomColor(stock.symbol);
+            return (
+              <div key={stock.id} style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '15px'
+              }}>
+                <div style={{ width: '80px', textAlign: 'right' }}>
+                  <strong>{stock.symbol}</strong>
+                </div>
+                <div style={{
+                  height: '25px',
+                  width: `${Math.max(stock.allocation * 3, 10)}px`,
+                  backgroundColor: barColor,
+                  borderRadius: '3px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  color: 'white',
+                  paddingRight: '8px'
+                }}>
+                  {parseFloat(stock.allocation) > 5 ? `${stock.allocation}%` : ''}
+                </div>
+                <div>
+                  {parseFloat(stock.allocation) <= 5 ? `${stock.allocation}%` : ''} ${stock.marketValue.toFixed(2)}
+                </div>
+              </div>
+            );
+          })}
         </div>
-        <div className="allocation-legend">
-          {sortedStocks.map((stock) => (
-            <div key={stock.id} className="legend-item">
+        
+        {/* Colorful allocation bar */}
+        <div style={{ marginTop: '30px' }}>
+          <div className="allocation-bar" style={{
+            display: 'flex',
+            height: '40px',
+            width: '100%',
+            borderRadius: '4px',
+            overflow: 'hidden'
+          }}>
+            {sortedStocks.map((stock) => (
               <div 
-                className="legend-color" 
+                key={stock.id}
                 style={{ 
+                  width: `${stock.allocation}%`,
                   backgroundColor: getRandomColor(stock.symbol),
-                  width: '20px',
-                  height: '20px',
-                  display: 'inline-block',
-                  marginRight: '5px'
+                  height: '100%',
+                  transition: 'width 0.3s ease'
                 }}
+                title={`${stock.symbol}: ${stock.allocation}%`}
               />
-              <span>{stock.symbol} ({stock.allocation}%)</span>
-            </div>
-          ))}
+            ))}
+          </div>
+          
+          {/* Allocation legend */}
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '15px',
+            marginTop: '15px'
+          }}>
+            {sortedStocks.map((stock) => (
+              <div key={stock.id} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <div 
+                  style={{ 
+                    backgroundColor: getRandomColor(stock.symbol),
+                    width: '15px',
+                    height: '15px',
+                    borderRadius: '3px'
+                  }}
+                />
+                <span>{stock.symbol} ({stock.allocation}%)</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -129,16 +189,16 @@ const Portfolio = ({ stocks }) => {
 
 // Generate consistent colors based on stock symbol
 function getRandomColor(symbol) {
-  // Simple hash function
+  // Simple hash function for consistent colors
   let hash = 0;
   for (let i = 0; i < symbol.length; i++) {
     hash = symbol.charCodeAt(i) + ((hash << 5) - hash);
   }
   
-  // Convert to RGB
-  const r = (hash & 0xFF) % 200;
-  const g = ((hash >> 8) & 0xFF) % 200;
-  const b = ((hash >> 16) & 0xFF) % 200;
+  // Generate vibrant colors
+  const r = 50 + (hash & 0xFF) % 150;
+  const g = 50 + ((hash >> 8) & 0xFF) % 150;
+  const b = 50 + ((hash >> 16) & 0xFF) % 150;
   
   return `rgb(${r}, ${g}, ${b})`;
 }
