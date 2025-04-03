@@ -1,6 +1,6 @@
 // src/components/AddStockForm.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import { searchStocks, getStockQuotes } from '../services/yahooFinanceService';
+import { searchStocks, getStockQuotes } from '../services/yahooFinanceServices';
 
 const AddStockForm = ({ addStock }) => {
   const [stock, setStock] = useState({

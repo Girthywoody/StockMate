@@ -1,6 +1,6 @@
 // src/components/StockList.jsx
 import React, { useState, useEffect } from 'react';
-import { getStockQuotes, createRealtimeConnection } from '../services/yahooFinanceService';
+import { getStockQuotes, createRealtimeConnection } from '../services/yahooFinanceServices';
 
 const StockList = ({ stocks, removeStock, updateStockPrice }) => {
   const [realTimeData, setRealTimeData] = useState({});

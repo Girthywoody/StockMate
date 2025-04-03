@@ -1,7 +1,7 @@
 // src/components/StockChart.jsx
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { getHistoricalData } from '../services/yahooFinanceService';
+import { getHistoricalData } from '../services/yahooFinanceServices';
 
 const StockChart = ({ symbol }) => {
   const [chartData, setChartData] = useState([]);

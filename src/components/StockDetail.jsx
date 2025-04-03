@@ -1,6 +1,6 @@
 // src/components/StockDetail.jsx
 import React, { useState, useEffect } from 'react';
-import { getStockQuotes, getMockStockQuotes } from '../services/yahooFinanceService';
+import { getStockQuotes, getMockStockQuotes } from '../services/yahooFinanceServices';
 import StockChart from './StockChart';
 
 const StockDetail = ({ symbol, onClose }) => {

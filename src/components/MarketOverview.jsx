@@ -1,6 +1,6 @@
 // src/components/MarketOverview.jsx
 import React, { useState, useEffect } from 'react';
-import { getMarketSummary } from '../services/yahooFinanceService';
+import { getMarketSummary } from '../services/yahooFinanceServices';
 
 const MarketOverview = () => {
   const [marketData, setMarketData] = useState([]);

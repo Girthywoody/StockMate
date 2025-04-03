@@ -1,6 +1,6 @@
 // src/components/Dashboard.jsx
 import React, { useState, useEffect } from 'react';
-import { getStockQuotes } from '../services/yahooFinanceService';
+import { getStockQuotes } from '../services/yahooFinanceServices';
 
 const Dashboard = ({ stocks, onSelectStock }) => {
   const [realTimeData, setRealTimeData] = useState({});
