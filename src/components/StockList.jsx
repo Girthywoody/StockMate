@@ -161,4 +161,4 @@ const StockList = ({ stocks, removeStock, updateStockPrice }) => {
   );
 };
 
-export default Stocklist;
+export default StockList;
