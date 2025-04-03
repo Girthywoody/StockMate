@@ -11,7 +11,7 @@ import Dashboard from './components/Dashboard';
 import MarketOverview from './components/MarketOverview';
 import StockDetail from './components/StockDetail';
 import StockChart from './components/StockChart';
-import { getStockQuotes } from './services/yahooFinanceService';
+import { getStockQuotes } from './services/yahooFinanceServices';
 
 function App() {
   // Load stocks from localStorage on initial render
