@@ -1,7 +1,8 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import './RealTimeComponents.css';
+// Note: Changed the import path to match the correct filename
+import './realTimeComponents.css';
 import StockList from './components/StockList';
 import AddStockForm from './components/AddStockForm';
 import Portfolio from './components/Portfolio';
